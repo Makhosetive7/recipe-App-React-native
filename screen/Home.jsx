@@ -1,10 +1,18 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, View, Image, Text, Platform, TouchableOpacity, Linking, ScrollView, FlatList, TextInput, Button } from 'react-native';
+import { useFonts } from 'expo-font';
+import { StyleSheet, SafeAreaView, View, Image, Text, Platform, TouchableOpacity, Linking, ScrollView, FlatList, TextInput, Button, ActivityIndicator } from 'react-native';
+import Footer from '../components/Footer';
+import PopularMeals from '../components/PopularMeals';
 
 export default function Home() {
     const handlePress = () => {
         Linking.openURL('https://www.themealdb.com');
-    }
+    };
+
+    const [fontsLoaded] = useFonts({
+        'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
+      });
+    
 
     // Data for the FlatList
     const benefitsData = [
@@ -19,6 +27,10 @@ export default function Home() {
         { key: "Customize for needs." },
         { key: "Discover culinary insights." },
     ];
+
+    if (!fontsLoaded) {
+        return     <ActivityIndicator size="large" color="#0000ff" />
+      }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -72,56 +84,11 @@ export default function Home() {
                         />
                     </View>
                     <View style={styles.popularMeals}>
-                        <View style={styles.popularMeal}>
-                            <Image
-                                style={styles.image}
-                                source={{ uri: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
-                                resizeMode="cover"
-                            />
-                        </View>
-                        <View style={styles.popularMeal}>
-                            <Image
-                                style={styles.image}
-                                source={{ uri: 'https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }}
-                                resizeMode="cover"
-                            />
-                        </View>
+                        <Text style={styles.popularMealsHeader}>Popular Meals</Text>
+                        <PopularMeals />
                     </View>
-
-                    <View style={styles.footer}>
-                        <View style={styles.footerSection}>
-                            <Text style={styles.footerHeader}>Contact Developer</Text>
-                            <Text>Email: sibandaMakhosetive7@gmail.com</Text>
-                            <Text>Phone: +263 782 082 120</Text>
-                            <Text>Address: Bulawayo, Zimbabwe</Text>
-                            <Text>Creator: Frontend developer</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.footer}>
-                        <Text style={styles.footerHeader}>Follow Developer</Text>
-                        <TouchableOpacity onPress={() => handleLink('https://github.com/Makhosetive7')}>
-                            <Text>Github</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleLink('https://twitter.com/Makhoe_7')}>
-                            <Text>Twitter</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleLink('https://makhosetive7-portfolio.netlify.app/')}>
-                            <Text>Portfolio</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.footer}>
-                        <Text style={styles.footerHeader}>Subscribe</Text>
-                        <View style={styles.subscribeForm}>
-                            <TextInput style={styles.input} type="email" name="email" placeholder="Your email" required />
-                            <Button style={styles.button} title='submit' />
-                        </View>
-                    </View>
-
-                    <View style={styles.footer}>
-                        <Text style={styles.footerHeader}>Legal</Text>
-                        <Text>© 2024 Food-Recipe-App. All rights reserved.</Text>
+                    <View>
+                        <Footer />
                     </View>
                 </View>
             </ScrollView>
@@ -177,6 +144,7 @@ const styles = StyleSheet.create({
         color: '#c4b0ff',
         textAlign: 'center',
         fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
+        fontFamily: 'Rajdhani-Regular',
     },
     bannerDetails_2: {
         fontSize: 20,
@@ -228,56 +196,11 @@ const styles = StyleSheet.create({
     italic: {
         fontStyle: 'italic',
     },
-    popularMeals: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 10,
-    },
-    popularMeal: {
-        width: '48%',
-        height: 200,
-        borderRadius: 10,
-        marginBottom: 10,
-    },
-    image: {
-        flex: 1,
-        width: null,
-        height: null,
-        borderRadius: 10,
-    },
-    footer: {
-        margin: 10,
-        padding: 10,
-        borderWidth: 1,
-        borderColor: '#7373ff29',
-        borderRadius: 10,
-        backgroundColor: 'white',
-    },
-    footerHeader: {
-        fontSize: 18,
+    popularMealsHeader: {
+        textAlign: "center",
+        fontSize: 20,
         fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 5,
-        textAlign: 'center',
-    },
-    subscribeForm: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    input: {
-        flex: 1,
-        height: 40,
-        paddingHorizontal: 10,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        marginRight: 10,
-    },
-    button: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        backgroundColor: '#4CAF50',
-        borderRadius: 5,
-    },
+        color: '#c4b0ff',
+        marginBottom: 10,
+    }
 });
