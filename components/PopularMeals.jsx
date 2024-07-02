@@ -9,7 +9,7 @@ export default function PopularMeals() {
     const fetchRecipes = async () => {
         try {
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=Beef`);
-            setData(response.data.meals); // Access the 'meals' key in the response
+            setData(response.data.meals);
             setLoading(false);
         } catch (error) {
             console.log("The error is:", error);

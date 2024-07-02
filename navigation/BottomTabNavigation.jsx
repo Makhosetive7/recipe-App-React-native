@@ -39,7 +39,16 @@ const BottomTabNavigation = () => {
         component={BeefPage}
         options={{
           tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons name="food-outline" size={24} color={focused ? '#c4b0ff' : 'black'} />
+            <MaterialCommunityIcons name="food-steak" size={24} color={focused ? '#c4b0ff' : 'black'} />
+          ),
+        }}
+      />
+         <Tab.Screen
+        name="chicken"
+        component={ChickenPage}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons name="food-drumstick-outline" size={24} color={focused ? '#c4b0ff' : 'black'} />
           ),
         }}
       />
@@ -49,15 +58,6 @@ const BottomTabNavigation = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons name="glass-cocktail" size={24} color={focused ? '#c4b0ff' : 'black'} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="chicken"
-        component={ChickenPage}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons name="food-drumstick-outline" size={24} color={focused ? '#c4b0ff' : 'black'} />
           ),
         }}
       />
