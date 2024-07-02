@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
-import { StyleSheet, SafeAreaView, View, Image, Text, Platform, TouchableOpacity, Linking, ScrollView, FlatList, TextInput, Button, ActivityIndicator } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Image, Text, TouchableOpacity, Linking, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import Footer from '../components/Footer';
 import PopularMeals from '../components/PopularMeals';
 
@@ -11,8 +11,8 @@ export default function Home() {
 
     const [fontsLoaded] = useFonts({
         'Rajdhani-Regular': require('../assets/fonts/Rajdhani-Regular.ttf'),
-      });
-    
+        'Orbitron-Regular': require('../assets/fonts/Orbitron-Regular.ttf'),
+    });
 
     // Data for the FlatList
     const benefitsData = [
@@ -29,8 +29,8 @@ export default function Home() {
     ];
 
     if (!fontsLoaded) {
-        return     <ActivityIndicator size="large" color="#0000ff" />
-      }
+        return <ActivityIndicator size="large" color="#0000ff" />;
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -44,8 +44,8 @@ export default function Home() {
                         />
                     </View>
                     <View style={styles.overlay}>
-                        <Text style={styles.bannerDetails_1}>Unleash Culinary Skills</Text>
-                        <Text style={styles.bannerDetails_2}>Explore mouthwatering dishes. Cook anytime.</Text>
+                        <Text style={styles.bannerDetails1}>Unleash Culinary Skills</Text>
+                        <Text style={styles.bannerDetails2}>Explore mouthwatering dishes. Cook anytime.</Text>
                     </View>
                 </View>
                 <View style={styles.about}>
@@ -138,21 +138,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         borderRadius: 10,
     },
-    bannerDetails_1: {
+    bannerDetails1: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#c4b0ff',
         textAlign: 'center',
-        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
         fontFamily: 'Rajdhani-Regular',
     },
-    bannerDetails_2: {
+    bannerDetails2: {
         fontSize: 20,
         fontWeight: 'bold',
         color: 'white',
         textAlign: 'center',
-        fontFamily: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Roboto',
         textTransform: 'uppercase',
+        fontFamily: 'Orbitron-Regular',
     },
     about: {
         margin: 10,
