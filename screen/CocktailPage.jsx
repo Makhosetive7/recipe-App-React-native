@@ -29,12 +29,12 @@ const CocktailPage = () => {
         <FlatList
           data={data}
           keyExtractor={(item) => item.idDrink.toString()}
-          numColumns={2}
+          numColumns={1}
           renderItem={({ item }) => (
             <View style={styles.card}>
               <Image source={{ uri: item.strDrinkThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strDrink}</Text>
               <Text style={styles.category}>{item.strCategory} || {item.strGlass}</Text>
+              <Text style={styles.instructions}>{item.strInstructions.substring(0, 150)}...</Text>
             </View>
           )}
           contentContainerStyle={styles.listContainer}
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#c4b0ff',
-    margin: 10,
-    flex: 1,
+    marginVertical: 10,
+    width: '100%',
     alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
@@ -71,21 +71,23 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
-    marginBottom: 10,
+    height: 200,
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
   category: {
     fontSize: 14,
     color: 'gray',
     marginBottom: 5,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
+  instructions: {
+    padding: 10,
+  }
 });
 
 export default CocktailPage;

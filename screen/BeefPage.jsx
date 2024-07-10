@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, FlatList, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
-const BeefPage = () => {
+const BeefPage = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -29,13 +29,14 @@ const BeefPage = () => {
         <FlatList
           data={data}
           keyExtractor={(item) => item.idMeal.toString()}
-          numColumns={2}
           renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-              <Text style={styles.title}>{item.strMeal}</Text>
-              <Text style={styles.category}>{item.strCategory} || {item.strArea}</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate('recipe_details', { idMeal: item.idMeal })}>
+              <View style={styles.card}>
+                <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+                <Text style={styles.category}>{item.strCategory} || {item.strArea}</Text>
+                <Text style={styles.instructions}>{item.strInstructions.substring(0, 150)}...</Text>
+              </View>
+            </TouchableOpacity>
           )}
           contentContainerStyle={styles.listContainer}
         />
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#c4b0ff',
-    margin: 10,
-    flex: 1,
+    marginVertical: 10,
+    width: '100%',
     alignItems: 'center',
     elevation: 3,
     shadowColor: '#000',
@@ -71,21 +72,18 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
+    height: 200,
     marginBottom: 10,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-    alignSelf: 'flex-start'
   },
   category: {
     fontSize: 14,
     color: 'gray',
     marginBottom: 5,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
   },
+  instructions: {
+    padding: 10,
+  }
 });
 
 export default BeefPage;
